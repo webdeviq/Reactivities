@@ -12,17 +12,18 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-
+builder.Services.AddCors();
 
 
 var app = builder.Build();
 
-
-
-
+app.UseCors(x => x
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .WithOrigins("http://localhost:3000","https://localhost:3000")
+);
 
 app.MapControllers();
-
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
@@ -36,8 +37,7 @@ try
 catch (Exception exception)
 {
     var logger = services.GetRequiredService<ILogger<Program>>();
-    logger.LogError(exception, "An error occured during migration");
+    logger.LogError(exception, "An error occured during migration"); 
 }
-
 
 app.Run();

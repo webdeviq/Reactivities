@@ -11,6 +11,7 @@ public class ActivitiesController(AppDbContext context) : BaseApiController
     [HttpGet]
     public async Task<ActionResult<List<Activity>>> GetActivities()
     {
+        Console.WriteLine("GetActivities called");
         return await context.Activities.ToListAsync();
     }
 
@@ -21,7 +22,5 @@ public class ActivitiesController(AppDbContext context) : BaseApiController
         if (activity == null) return NotFound();
         return activity;
     }
-
-
 }
 
