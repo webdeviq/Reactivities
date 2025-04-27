@@ -1,4 +1,11 @@
-import { List, ListItem, ListItemText, Typography } from "@mui/material";
+import {
+  Container,
+  CssBaseline,
+  List,
+  ListItem,
+  ListItemText,
+} from "@mui/material";
+import NavBar from "./NavBar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -13,14 +20,11 @@ function App() {
 
   return (
     <>
-      <Typography variant="h3">Reactivities</Typography>
-      <List>
-        {activities.map((activity) => (
-          <ListItem key={activity.id}>
-            <ListItemText>{activity.title}</ListItemText>
-          </ListItem>
-        ))}
-      </List>
+      <CssBaseline />
+      <NavBar />
+      <Container maxWidth="xl" sx={{ mt: 3 }}>
+        
+      </Container>
     </>
   );
 }
